@@ -1,4 +1,4 @@
-# rpi-gst-v4l2-docker
+# rpi-gstreamer-docker
 
 ## Prerequisites 
 
