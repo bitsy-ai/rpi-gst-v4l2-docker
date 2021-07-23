@@ -1,7 +1,8 @@
 FROM debian:buster
 
 # https://gstreamer.freedesktop.org/documentation/video4linux2/v4l2src.html?gi-language=c#example-launch-lines
-# Since 1.14, the use of libv4l2 has been disabled due to major bugs in the emulation layer. To enable usage of this library, set the environment variable GST_V4L2_USE_LIBV4L2=1.
+# > Since 1.14, the use of libv4l2 has been disabled due to major bugs in the emulation layer. To enable usage of this library, set the environment variable GST_V4L2_USE_LIBV4L2=1.
+# TODO ٩(๏_๏)۶ Learn more about the "major bugs" in the emulation layer ٩(๏_๏)۶
 env GST_V4L2_USE_LIBV4L2=1
 
 # Platform dependencies
