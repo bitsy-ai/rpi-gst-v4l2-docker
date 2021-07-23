@@ -21,3 +21,10 @@ RUN cd usrsctp && \
     ./bootstrap && \
     ./configure --prefix=/usr --disable-programs --disable-inet --disable-inet6 && \
     make && make install
+
+RUN git clone https://libwebsockets.org/repo/libwebsockets
+RUN cd libwebsockets && git checkout v3.2-stable && \
+    mkdir build && \
+    cd build && \
+    cmake -DLWS_MAX_SMP=1 -DLWS_WITHOUT_EXTENSIONS=0 -DCMAKE_INSTALL_PREFIX:PATH=/usr -DCMAKE_C_FLAGS="-fpic" .. && \
+    make && make install
