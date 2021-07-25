@@ -45,4 +45,8 @@ RUN cd janus-gateway && \
     make && \
     make install
 
-ENTRYPOINT [ "janus" ]
+RUN cd janus-gateway && \
+    ./configure --disable-rabbitmq --disable-mqtt
+
+
+ENTRYPOINT [ "/opt/janus/bin/janus" ]

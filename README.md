@@ -20,17 +20,33 @@ $ sh ./get-docker.sh
 2. [Post-installation steps for Linux](https://docs.docker.com/engine/install/linux-postinstall/)
 
 
-## Test v4l2src 
-
+## Test v4l2src capture
 
 ```
-sudo docker run -it --rm --device=/dev/video0 bitsy.ai/rpi-gstreamer:latest \
+docker run -it --rm --device=/dev/video0 bitsy.ai/rpi-gstreamer:latest \
     gst-launch-1.0 v4l2src num-buffers=1 ! jpegenc ! filesink location=capture1.jpeg
 ```
 
 ## Test webrtcbin
 
-@TODO
+1. Start Janus Gateway
+
+```
+docker run -it --rm bitsy.ai/janus-gateway:latest \
+    gst-launch-1.0 v4l2src num-buffers=1 \
+    ! h264parse \
+    ! rtph264pay config-interval=1 pt=96 \
+    ! udpsink host=127.0.0.1 port=5004
+```
+
+2. Start Gstreamer
+```
+docker run -it --rm --device=/dev/video0 bitsy.ai/rpi-gstreamer:latest \
+    gst-launch-1.0 v4l2src num-buffers=1 \
+    ! h264parse \
+    ! rtph264pay config-interval=1 pt=96 \
+    ! udpsink host=127.0.0.1 port=5004
+```
 
 ### References
 
