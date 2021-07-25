@@ -13,6 +13,8 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y \
     cmake \
     wget
 
+RUN mkdir /workspace
+WORKDIR /workspace
 RUN python3 -m pip install meson ninja
 RUN git clone https://gitlab.freedesktop.org/libnice/libnice
 RUN cd libnice && meson --prefix=/usr build && ninja -C build && ninja -C build install
@@ -42,3 +44,5 @@ RUN cd janus-gateway && \
     ./configure --prefix=/opt/janus && \
     make && \
     make install
+
+ENTRYPOINT [ "janus" ]
