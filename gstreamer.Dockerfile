@@ -35,5 +35,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get -y -qq install \
     libgstreamer-plugins-base1.0-dev \
     gstreamer1.0-plugins-* \
     gstreamer1.0-tools \
+    gstreamer1.0-vaapi \
     gstreamer1.0-x
 
+ENTRYPOINT [ "gst-launch-1.0" ]
